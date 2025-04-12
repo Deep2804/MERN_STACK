@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import lighthouse from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
+import Report from '../models/Report.js';
+
 
 const app = express();
 app.use(cors());
@@ -34,11 +36,19 @@ app.post('/audit', async (req, res) => {
     const reportJson = JSON.parse(runnerResult.report);
     const accessibilityScore = reportJson.categories.accessibility.score;
 
+    await Report.create({
+      url,
+      score: accessibilityScore,
+      audits: reportJson.audits
+    });
+    
+
     res.json({
       score: accessibilityScore,
       audits: reportJson.audits
     });
 
+  
     await chrome.kill();
   } catch (error) {
     console.error('Error during audit:', error);
@@ -46,5 +56,16 @@ app.post('/audit', async (req, res) => {
     res.status(500).json({ error: 'Failed to run audit. Make sure the URL is correct and publicly accessible.' });
   }
 });
+
+app.get('/reports', async (req, res) => {
+  try {
+    const reports = await Report.find().sort({ createdAt: -1 });
+    res.json(reports);
+  } catch (err) {
+    console.error("Error fetching reports:", err);
+    res.status(500).json({ error: 'Failed to fetch reports' });
+  }
+});
+
 
 export default app;
