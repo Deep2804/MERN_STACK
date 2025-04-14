@@ -27,3 +27,37 @@ body {
     box-shadow: 0 0 4px rgba(0,0,0,0.1);
   }
   
+  .back-link {
+    text-decoration: none;
+    color: #007bff;
+    margin-bottom: 16px;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  .page-title {
+    margin: 20px 0;
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .no-reports-msg {
+    text-align: center;
+    color: gray;
+    font-size: 18px;
+    margin-top: 40px;
+  }
+  
+  .report-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  /* Optional: For larger screens, make it 2-column */
+  @media (min-width: 768px) {
+    .report-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
