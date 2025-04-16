@@ -54,7 +54,7 @@ const Home = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {Array.isArray(reports) && reports.length === 0 && !loading && <p>No reports found.</p>}
       {Array.isArray(reports) && reports.map((report, idx) => (
-        <ReportCard key={idx} report={report} />
+        <ReportCard key={report._id || idx} report={report} />
       ))}
     </div>
   );

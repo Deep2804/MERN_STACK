@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ReportCard = ({ report }) => {
   console.log("Report data in ReportCard:", report);
   if (!report) return null;
-  const { url, score, createdAt, audits } = report;
+  const { _id, url, score, createdAt, audits } = report;
 
   const formattedScore = Math.round(score * 100);
   const formattedDate = new Date(createdAt).toLocaleString('en-IN', {
@@ -21,12 +22,12 @@ const ReportCard = ({ report }) => {
 
   return (
     <div className="report-card" style={cardStyle}>
-       <h3>{url || 'No URL'}</h3> {/* Add fallback for undefined */}
+      <h3>{url || 'No URL'}</h3>
       <p><strong>Accessibility Score:</strong> {formattedScore}%</p>
       <p><strong>Generated At:</strong> {formattedDate}</p>
       <p><strong>✅ {passedCount} / {totalCount} checks passed</strong></p>
 
-      {failingAudits.length > 0 && (
+      {/* {failingAudits.length > 0 && (
         <>
           <h4>⚠️ Issues Found:</h4>
           <ul>
@@ -37,6 +38,13 @@ const ReportCard = ({ report }) => {
             ))}
           </ul>
         </>
+      )} */}
+
+      {/* ✅ Add this Link button */}
+      {(_id &&
+        <Link to={`/report/${_id}`} style={linkStyle}>
+          📄 View Full Report
+        </Link>
       )}
     </div>
   );
@@ -47,7 +55,13 @@ const cardStyle = {
   padding: '1rem',
   borderRadius: '10px',
   marginBottom: '1rem',
-  background: '#f9f9f9',
+};
+const linkStyle = {
+  marginTop: '10px',
+  display: 'inline-block',
+  textDecoration: 'none',
+  color: '#007bff',
+  fontWeight: 'bold'
 };
 
 export default ReportCard;

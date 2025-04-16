@@ -34,3 +34,18 @@ export const getAllReports = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch reports' });
   }
 };
+
+export const getReportById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("ID received:", id); // Add this for debugging
+    const report = await Report.findById(id);
+    if (!report) return res.status(404).json({ message: 'Report not found' });
+    res.json(report);
+  } catch (error) {
+    console.error("Error fetching report by ID:", error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+

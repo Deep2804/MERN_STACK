@@ -1,12 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
   }
   
   .container {
     max-width: 600px;
-    margin: auto;
     padding: 20px;
+    margin: 50px;
   }
   
   input {
@@ -22,9 +22,16 @@ body {
   .report-card {
     background: white;
     margin-top: 16px;
+    margin-right: 50px;
     padding: 12px;
     border-radius: 6px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease-in;
+  }
+
+  .report-card:hover{
+    transform: scale(1.1);
+    cursor: pointer;
   }
   
   .back-link {
@@ -50,14 +57,43 @@ body {
   
   .report-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   
   /* Optional: For larger screens, make it 2-column */
-  @media (min-width: 768px) {
-    .report-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
   
+
+/* Filter & Sorting Container */
+.filters-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  justify-content: center;
+}
+
+.filters-container label {
+  font-weight: bold;
+  margin-right: 4px;
+  font-size: 14px;
+}
+
+.filters-container select {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.filters-container select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.filters-container select option{
+  font-size: 16px;
+}
